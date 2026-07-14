@@ -1,12 +1,28 @@
 import { useEffect, useState } from "react";
 import MascotaApi from "../../api/apiMascotas";
 
-function MascotasForm() {
+
+
+function MascotasForm({onAdd}) {
+
+
 
     const [estados, setEstados] = useState([]);
     const [tipoMascota, setTipoMascota] = useState([]);
     const [sexo, setSexo] = useState([]);
     const [tamano, setTamano] = useState([]);
+
+    const [tamanoSeleccionado, setTamanoSeleccionado] = useState("");
+    const [estadoSeleccionado, setEstadoSeleccionado] = useState("");
+    const [tipoSeleccionado, setTipoSeleccionado] = useState("");
+    const [sexoSeleccionado, setSexoSeleccionado] = useState("");
+
+    const [nombre, setNombre] = useState("");
+    const [imagen, setImagen] = useState(null);
+    const [edad, setEdad] = useState("");
+    const [raza, setRaza] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+
 
     const fetchChoices = async () => {
 
@@ -23,36 +39,61 @@ function MascotasForm() {
 
     }
 
-    useEffect(() => {
-        fetchChoices();
+  
+    
+        useEffect(() => {
+            fetchChoices();
+    
+        }, [])
 
-    }, [])
+
+
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+       
+
+       const formData = new FormData();
+       formData.append("nombre",nombre);
+       formData.append("descripcion",descripcion);
+       formData.append("edad",edad);
+       formData.append("raza",raza);
+       formData.append("estado",estadoSeleccionado);
+       formData.append("tipo_animal",tipoSeleccionado);
+       formData.append("sexo",sexoSeleccionado);
+       formData.append("tamano",tamanoSeleccionado);
+       formData.append("imagen",imagen);
+
+        onAdd(formData);
+
+    }
 
     return (
-        <form>
+        <form onSubmit={e => handleSubmit(e)} encType="multipart/form-data">
             <label>Nombre:
-                <input type="text" />
-            </label>
-            <label>Descripcion:
-                <textarea ></textarea>
+                <input onChange={e => setNombre(e.target.value)} value={nombre} type="text" />
             </label>
             <label>Edad:
-                <input type="number" />
+                <input onChange={e => setEdad(e.target.value)} value={edad} type="number" />
             </label>
             <label>raza:
-                <input type="text" />
+                <input onChange={e => setRaza(e.target.value)} value={raza} type="text" />
+            </label>
+            <label>Descripcion:
+                <textarea onChange={e => setDescripcion(e.target.value)} value={descripcion}></textarea>
             </label>
             <label >
-                <select >
-                    
+                <select value={estadoSeleccionado} onChange={(e) => setEstadoSeleccionado(e.target.value)} >
+
                     {
                         estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
                 </select>
             </label>
             <label>
-                <select>
-                    
+                <select value={tipoSeleccionado} onChange={(e) => setTipoSeleccionado(e.target.value)}>
+
                     {
                         tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
@@ -60,8 +101,8 @@ function MascotasForm() {
                 </select>
             </label>
             <label>
-                <select>
-                    
+                <select value={sexoSeleccionado} onChange={(e) => setSexoSeleccionado(e.target.value)}>
+
                     {
                         sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
@@ -69,8 +110,8 @@ function MascotasForm() {
                 </select>
             </label>
             <label>
-                <select>
-                    
+                <select value={tamanoSeleccionado} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
+
                     {
                         tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
                     }
@@ -78,11 +119,11 @@ function MascotasForm() {
                 </select>
             </label>
             <label>
-                <input type="file"  />
+                <input onChange={(e) => setImagen(e.target.files[0])} type="file" />
             </label>
 
 
-
+            <button type="submit" > Agregar Mascota</button>
 
         </form>
 
