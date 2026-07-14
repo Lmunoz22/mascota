@@ -9,8 +9,8 @@ function MascotasPage() {
     const fetchMascotas = async () => {
         try {
             const response = await MascotaApi.get('mascotas/');
-            console.log(response.data.results);
-            setMascotasList(response.data.results);
+            console.log(response.data);
+            setMascotasList(response.data);
         } catch (error) {
             console.log(error);
         };
