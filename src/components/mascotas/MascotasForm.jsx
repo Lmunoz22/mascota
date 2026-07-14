@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import MascotaApi from "../../api/apiMascotas";
 
-function MascotasForm() {
+
+
+function MascotasForm({onAdd}) {
+
+
 
     const [estados, setEstados] = useState([]);
-    const [estadoSeleccionado, setEstadoSeleccionado] = useState([]);
     const [tipoMascota, setTipoMascota] = useState([]);
-    const [tipoSeleccionado, setTipoSeleccionado] = useState([]);
     const [sexo, setSexo] = useState([]);
-    const [sexoSeleccionado, setSexoSeleccionado] = useState([]);
     const [tamano, setTamano] = useState([]);
-    const [tamanoSeleccionado, setTamanoSeleccionado] = useState([])
-    const [nombre, setNombre] = useState([]);
-    const [imagen, setImagen] = useState([]);
-    const [edad, setEdad] = useState([]);
-    const [raza, setRaza] = useState([]);
-    const [descripcion, setDescripcion] = useState([]);
+
+    const [tamanoSeleccionado, setTamanoSeleccionado] = useState("");
+    const [estadoSeleccionado, setEstadoSeleccionado] = useState("");
+    const [tipoSeleccionado, setTipoSeleccionado] = useState("");
+    const [sexoSeleccionado, setSexoSeleccionado] = useState("");
+
+    const [nombre, setNombre] = useState("");
+    const [imagen, setImagen] = useState(null);
+    const [edad, setEdad] = useState("");
+    const [raza, setRaza] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+
 
     const fetchChoices = async () => {
 
@@ -31,46 +38,39 @@ function MascotasForm() {
         } catch (error) { console.log(error) }
 
     }
-     
-    const addMascota = async() => {
-        try{
-            const response = MascotaApi.post("mascotas/", data)
 
-        }catch(error){
-            console.log(error)
-        }
-    }
+  
+    
+        useEffect(() => {
+            fetchChoices();
+    
+        }, [])
 
 
 
-
-    useEffect(() => {
-        fetchChoices();
-
-    }, [])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(estadoSeleccionado)
+       
 
-        const Mascotas = {
-            nombre:nombre,
-            descripcion:descripcion,
-            imagen:imagen,
-            estado:estadoSeleccionado,
-            tipo_animal:tipoSeleccionado,
-            edad:edad,
-            raza:raza,
-            sexo:sexoSeleccionado
+       const formData = new FormData();
+       formData.append("nombre",nombre);
+       formData.append("descripcion",descripcion);
+       formData.append("edad",edad);
+       formData.append("raza",raza);
+       formData.append("estado",estadoSeleccionado);
+       formData.append("tipo_animal",tipoSeleccionado);
+       formData.append("sexo",sexoSeleccionado);
+       formData.append("tamano",tamanoSeleccionado);
+       formData.append("imagen",imagen);
 
-
-        }
+        onAdd(formData);
 
     }
 
     return (
-        <form onSubmit={e => handleSubmit(e)}>
+        <form onSubmit={e => handleSubmit(e)} encType="multipart/form-data">
             <label>Nombre:
                 <input onChange={e => setNombre(e.target.value)} value={nombre} type="text" />
             </label>
@@ -119,11 +119,11 @@ function MascotasForm() {
                 </select>
             </label>
             <label>
-                <input onChange={(e) => setImagen(e.target.files)} type="file" />
+                <input onChange={(e) => setImagen(e.target.files[0])} type="file" />
             </label>
 
 
-            <button type="submit"> Agregar Mascota</button>
+            <button type="submit" > Agregar Mascota</button>
 
         </form>
 
