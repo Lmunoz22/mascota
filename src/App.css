@@ -1,0 +1,102 @@
+/* CONTENEDOR DE LAS CARDS */
+
+.contenedor-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1500px;
+    margin: 40px auto;
+}
+
+
+/* CARD */
+
+.card-mascota{
+    width: 300px;
+    height: 550px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.15);
+
+    display: flex;
+    flex-direction: column;
+
+    transition: .3s;
+}
+
+.card-mascota:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+
+
+
+.card-mascota img{
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+
+
+.contenido-card{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+
+
+.contenido-card h3{
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+
+/* DESCRIPCION */
+
+.contenido-card p{
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+
+/* RAZA */
+
+.contenido-card p:last-of-type{
+    font-weight: bold;
+    color: gray;
+}
+
+
+/* BOTON */
+
+.contenido-card a{
+
+    margin-top: auto;
+
+    background: #ff8a00;
+    color: white;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+                                                                        
+}
+
+.contenido-card a:hover{
+
+    background: #e57800;
+
+}
