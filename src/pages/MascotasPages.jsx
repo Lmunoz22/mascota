@@ -18,17 +18,20 @@ function MascotasPage() {
 
     };
 
-    const addMascotas = async(mascota) => {
-        try{
-            const response = await MascotaApi.post('mascotas/',mascota)
-            
-        }catch(error){
+    const addMascotas = async (mascota) => {
+        try {
+            const response = await MascotaApi.post('mascotas/', mascota)
+
+        } catch (error) {
             console.log(error)
 
-        }finally{fetchMascotas();}
+        } finally { fetchMascotas(); }
 
 
     }
+
+    
+
 
     useEffect(() => {
         fetchMascotas();
@@ -39,7 +42,7 @@ function MascotasPage() {
         <>
             <h1>Pagina Mascotas</h1>
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas}/>
+            <MascotasList lista={mascotasList} onAdd={addMascotas}  />
         </>
     )
 
