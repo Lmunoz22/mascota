@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <nav>
-          <NavLink to={"mascotas/"}>Mascotas</NavLink>
+          <NavLink  to={"mascotas/"}>Mascotas</NavLink>
         </nav>
 
         
