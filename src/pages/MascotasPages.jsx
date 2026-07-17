@@ -2,6 +2,15 @@ import MascotaApi from "../api/apiMascotas";
 import MascotasList from "../components/mascotas/MascotasList";
 import { useEffect, useState } from "react";
 
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
+const notyf = new Notyf({
+    duration: 3000,
+    position: { x: 'center', y: 'top' },
+    dismissible: true
+});
+
 
 function MascotasPage() {
 
@@ -29,8 +38,19 @@ function MascotasPage() {
 
 
     }
+    const deleteMascota = async (id) => {
+        try {
+            await MascotaApi.delete(`mascotas/${id}/`);
+            notyf.success("Se Elimino Correctamente");
+        } catch (error) {
+            console.log(error);
+            
+        } finally {
+            fetchMascotas();
+        }
+    };
 
-    
+
 
 
     useEffect(() => {
@@ -42,7 +62,7 @@ function MascotasPage() {
         <>
             <h1>Pagina Mascotas</h1>
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas}  />
+            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascota}/>
         </>
     )
 

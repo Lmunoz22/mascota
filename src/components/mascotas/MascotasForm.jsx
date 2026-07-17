@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import MascotaApi from "../../api/apiMascotas";
 
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+
+const notyf = new Notyf({
+    duration: 3000,
+    position: { x: 'center', y: 'top' },
+    dismissible: true
+});
 
 
 function MascotasForm({ onAdd }) {
@@ -35,7 +43,10 @@ function MascotasForm({ onAdd }) {
             setTamano(response.data.tamano)
 
 
-        } catch (error) { console.log(error) }
+        } catch (error) {
+            console.log(error)
+            notyf.error("Error al cargar las opciones del formulario.");
+        }
 
     }
 
@@ -53,6 +64,11 @@ function MascotasForm({ onAdd }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!nombre.trim()) {
+            notyf.error("El nombre de la mascota es obligatorio.");
+            return;
+        }
+
 
         const formData = new FormData();
         formData.append("nombre", nombre);
@@ -64,20 +80,26 @@ function MascotasForm({ onAdd }) {
         formData.append("sexo", sexoSeleccionado);
         formData.append("tamano", tamanoSeleccionado);
         formData.append("imagen", imagen);
+        try {
+            onAdd(formData);
+            notyf.success( 'se ha agregado correctamente!');
 
-        onAdd(formData);
+            setNombre("");
+            setEdad("");
+            setRaza("");
+            setDescripcion("");
+            setEstadoSeleccionado("");
+            setTipoSeleccionado("");
+            setSexoSeleccionado("");
+            setTamanoSeleccionado("");
+            setImagen(null);
 
-        setNombre("");
-        setEdad("");
-        setRaza("");
-        setDescripcion("");
-        setEstadoSeleccionado("");
-        setTipoSeleccionado("");
-        setSexoSeleccionado("");
-        setTamanoSeleccionado("");
-        setImagen(null);
+            e.target.reset();
+        } catch (error) {
+            console.error(error);
+            notyf.error("No se pudo agregar la mascota. Inténtalo de nuevo.");
+        }
 
-        e.target.reset();
 
     }
 

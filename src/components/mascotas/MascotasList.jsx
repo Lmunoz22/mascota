@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import MascotasForm from "./MascotasForm";
 
 
-function MascotasList({ lista, onAdd, onPut}) {
+
+
+function MascotasList({ lista, onAdd, onDelete }) {
 
 
 
@@ -28,10 +30,14 @@ function MascotasList({ lista, onAdd, onPut}) {
                                 <p>{m.raza}</p>
 
                                 <p>{m.estado}</p>
-
-                                <Link to={`/mascotas/${m.id}`}>
-                                    Ver Mascota
-                                </Link>
+                                <div className="acciones">
+                                    <Link className="btn-ver"to={`/mascotas/${m.id}`}>
+                                        Ver Mascota
+                                    </Link>
+                                    <button className="btn-eliminar" onClick={() => onDelete(m.id)}>
+                                        Eliminar
+                                    </button>
+                                </div>
 
                             </div>
 

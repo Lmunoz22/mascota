@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import MascotaApi from "../../api/apiMascotas";
 
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 
+const notyf = new Notyf({
+    duration: 3000,
+    position: { x: 'center', y: 'top' },
+    dismissible: true
+});
 
 function MascotasEdit({ mascota, onFinish }) {
 
@@ -49,7 +56,10 @@ function MascotasEdit({ mascota, onFinish }) {
             setTamano(response.data.tamano)
 
 
-        } catch (error) { console.log(error) }
+        } catch (error) {
+            console.log(error)
+            notyf.error("Error al cargar las opciones del formulario.");
+        }
 
     }
 
@@ -67,6 +77,11 @@ function MascotasEdit({ mascota, onFinish }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!nombre.trim()) {
+            notyf.error("El nombre de la mascota es obligatorio.");
+            return;
+        }
+
 
         const formData = new FormData();
         formData.append("nombre", nombre);
@@ -77,20 +92,19 @@ function MascotasEdit({ mascota, onFinish }) {
         formData.append("tipo_animal", tipoSeleccionado);
         formData.append("sexo", sexoSeleccionado);
         formData.append("tamano", tamanoSeleccionado);
-        
-
-        if (imagen) {
         formData.append("imagen", imagen);
-    }
-        try{
+
+       
+        try {
 
             const response = await MascotaApi.put(`mascotas/${mascota.id}/`, formData);
-            
-            console.log (response.data)
-        }catch(error){
+            notyf.success( 'se actualizo correctamente!');
+            console.log(response.data)
+        } catch (error) {
             console.log(error.response.data);
+            notyf.error("No se pudo actualizar la mascota. Inténtalo de nuevo.");
         };
-        
+
         onFinish();
 
     }
