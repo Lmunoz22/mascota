@@ -2,13 +2,14 @@ import { useParams } from "react-router-dom";
 import MascotaApi from "../../api/apiMascotas";
 import { useEffect, useState } from "react";
 
-function MascotasDetail() {
+function MascotasDetail(s) {
 
     const { id } = useParams();
 
     console.log(id);
     const [fetchError, setFetchError] = useState(false);
     const [mascota, setMascota] = useState(null);
+    const [editando, setEditando] = useState(false);
 
     const fetchMascotaDetail = async () => {
 
@@ -30,30 +31,44 @@ function MascotasDetail() {
     useEffect(() => {
         fetchMascotaDetail()
     }, []);
-
+    async function marcarComoAdoptada(id) {
+        try {
+            await MascotaApi.patch(`/mascotas/${id}/`, { estado: 'adoptada' });
+            await fetchMascotaDetail(); // refresca la lista con el nuevo estado
+        } catch (err) {
+            console.log(err.response.data);
+        }
+    }
 
 
     return (
         <div>
-            {fetchError ? (<p>404 - Mascota no encontrada</p>
+            {fetchError ? (
+                <p>404 - Mascota no encontrada</p>
+            ) : (
+                <>
+                    <h2>{mascota?.nombre}</h2>
 
-            ) : (<>
-                
-                <h2>{mascota?.nombre}</h2>
-                <img src={mascota?.imagen} alt={mascota?.nombre} />
-                <p>Edad: {mascota?.edad}</p>
-                <p>Raza: {mascota?.raza}</p>
-                <p>Descripción: {mascota?.descripcion}</p>
+                    <img src={mascota?.imagen} alt={mascota?.nombre} />
 
-            </>
+                    <p>Edad: {mascota?.edad}</p>
+                    <p>Raza: {mascota?.raza}</p>
+                    <p>Descripción: {mascota?.descripcion}</p>
+                    <p>estado: {mascota?.estado}</p>
+
+
+                    <button onClick={() => marcarComoAdoptada(id)}>
+                        Marcar como adoptada
+                    </button>
+                   
+
+
+
+
+                </>
             )}
-
-
-
-
         </div>
-
-    )
+    );
 }
 
 

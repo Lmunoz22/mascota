@@ -1,4 +1,4 @@
-/* CONTENEDOR DE LAS CARDS */
+
 
 .contenedor-cards{
     display: flex;
@@ -10,7 +10,6 @@
 }
 
 
-/* CARD */
 
 .card-mascota{
     width: 300px;
@@ -59,7 +58,7 @@
 }
 
 
-/* DESCRIPCION */
+
 
 .contenido-card p{
     margin-bottom: 10px;
@@ -67,7 +66,7 @@
 }
 
 
-/* RAZA */
+
 
 .contenido-card p:last-of-type{
     font-weight: bold;
@@ -75,21 +74,16 @@
 }
 
 
-/* BOTON */
+
 
 .contenido-card a{
 
     margin-top: auto;
-
     background: #ff8a00;
     color: white;
-
     text-align: center;
-
     text-decoration: none;
-
     padding: 12px;
-
     border-radius: 10px;
 
                                                                         
@@ -100,3 +94,89 @@
     background: #e57800;
 
 }
+
+
+.formulario-mascota{
+
+    max-width:900px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+.formulario-mascota h2{
+
+    text-align:center;
+    margin-bottom:30px;
+    color:#333;
+
+}
+
+
+.forms{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+
+}
+
+.formulario-mascota label{
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-weight:bold;
+
+}
+
+
+.formulario-mascota input,
+.formulario-mascota select{
+
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+
+}
+
+.formulario-mascota textarea{
+
+    width:100%;
+    margin-top:8px;
+    resize:none;
+    height:120px;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+
+
+}
+
+.formulario-mascota button{
+
+    width:100%;
+    margin-top:5px;
+    padding:15px;
+    background:#ff8a00;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+}
+    
+    
+    
+
+
+
+
+
+
+    

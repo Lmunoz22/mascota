@@ -2,15 +2,16 @@
 
 import { Link } from "react-router-dom";
 import MascotasForm from "./MascotasForm";
+import MascotasDetail from "./Mascotasdetail";
 
-function MascotasList({ lista, onAdd }) {
+function MascotasList({ lista, onAdd, onPut}) {
 
 
 
     return (
         <>
             <h2>Lista Mascotas</h2>
-
+            <MascotasDetail onPut={onPut}/>
             <MascotasForm onAdd={onAdd} />
             <div className="contenedor-cards">
                 {
@@ -26,6 +27,8 @@ function MascotasList({ lista, onAdd }) {
                                 <p>{m.descripcion}</p>
 
                                 <p>{m.raza}</p>
+
+                                <p>{m.estado}</p>
 
                                 <Link to={`/mascotas/${m.id}`}>
                                     Ver Mascota

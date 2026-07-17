@@ -3,7 +3,7 @@ import MascotaApi from "../../api/apiMascotas";
 
 
 
-function MascotasForm({onAdd}) {
+function MascotasForm({ onAdd }) {
 
 
 
@@ -39,12 +39,12 @@ function MascotasForm({onAdd}) {
 
     }
 
-  
-    
-        useEffect(() => {
-            fetchChoices();
-    
-        }, [])
+
+
+    useEffect(() => {
+        fetchChoices();
+
+    }, [])
 
 
 
@@ -52,78 +52,81 @@ function MascotasForm({onAdd}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-       
 
-       const formData = new FormData();
-       formData.append("nombre",nombre);
-       formData.append("descripcion",descripcion);
-       formData.append("edad",edad);
-       formData.append("raza",raza);
-       formData.append("estado",estadoSeleccionado);
-       formData.append("tipo_animal",tipoSeleccionado);
-       formData.append("sexo",sexoSeleccionado);
-       formData.append("tamano",tamanoSeleccionado);
-       formData.append("imagen",imagen);
+
+        const formData = new FormData();
+        formData.append("nombre", nombre);
+        formData.append("descripcion", descripcion);
+        formData.append("edad", edad);
+        formData.append("raza", raza);
+        formData.append("estado", estadoSeleccionado);
+        formData.append("tipo_animal", tipoSeleccionado);
+        formData.append("sexo", sexoSeleccionado);
+        formData.append("tamano", tamanoSeleccionado);
+        formData.append("imagen", imagen);
 
         onAdd(formData);
 
     }
 
     return (
-        <form onSubmit={e => handleSubmit(e)} encType="multipart/form-data">
-            <label>Nombre:
-                <input onChange={e => setNombre(e.target.value)} value={nombre} type="text" />
-            </label>
-            <label>Edad:
-                <input onChange={e => setEdad(e.target.value)} value={edad} type="number" />
-            </label>
-            <label>raza:
-                <input onChange={e => setRaza(e.target.value)} value={raza} type="text" />
-            </label>
-            <label>Descripcion:
-                <textarea onChange={e => setDescripcion(e.target.value)} value={descripcion}></textarea>
-            </label>
-            <label >
-                <select value={estadoSeleccionado} onChange={(e) => setEstadoSeleccionado(e.target.value)} >
+        <form className="formulario-mascota" onSubmit={e => handleSubmit(e)} encType="multipart/form-data">
 
-                    {
-                        estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
-                </select>
-            </label>
-            <label>
-                <select value={tipoSeleccionado} onChange={(e) => setTipoSeleccionado(e.target.value)}>
+            <div className="forms">
+                <label>Nombre:
+                    <input onChange={e => setNombre(e.target.value)} value={nombre} type="text" />
+                </label>
+                <label>Edad:
+                    <input onChange={e => setEdad(e.target.value)} value={edad} type="number" />
+                </label>
+                <label>raza:
+                    <input onChange={e => setRaza(e.target.value)} value={raza} type="text" />
+                </label>
+                <label>Descripcion:
+                    <textarea onChange={e => setDescripcion(e.target.value)} value={descripcion}></textarea>
+                </label>
+                <label >
+                    <select value={estadoSeleccionado} onChange={(e) => setEstadoSeleccionado(e.target.value)} >
 
-                    {
-                        tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
+                        {
+                            estados.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                        }
+                    </select>
+                </label>
+                <label>
+                    <select value={tipoSeleccionado} onChange={(e) => setTipoSeleccionado(e.target.value)}>
 
-                </select>
-            </label>
-            <label>
-                <select value={sexoSeleccionado} onChange={(e) => setSexoSeleccionado(e.target.value)}>
+                        {
+                            tipoMascota.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                        }
 
-                    {
-                        sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
+                    </select>
+                </label>
+                <label>
+                    <select value={sexoSeleccionado} onChange={(e) => setSexoSeleccionado(e.target.value)}>
 
-                </select>
-            </label>
-            <label>
-                <select value={tamanoSeleccionado} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
+                        {
+                            sexo.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                        }
 
-                    {
-                        tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
-                    }
+                    </select>
+                </label>
+                <label>
+                    <select value={tamanoSeleccionado} onChange={(e) => setTamanoSeleccionado(e.target.value)}>
 
-                </select>
-            </label>
-            <label>
-                <input onChange={(e) => setImagen(e.target.files[0])} type="file" />
-            </label>
+                        {
+                            tamano.map(e => <option value={e.value} key={e.value}>{e.label}</option>)
+                        }
+
+                    </select>
+                </label>
+                <label>
+                    <input onChange={(e) => setImagen(e.target.files[0])} type="file" />
+                </label>
 
 
-            <button type="submit" > Agregar Mascota</button>
+                <button type="submit" > Agregar Mascota</button>
+            </div>
 
         </form>
 
