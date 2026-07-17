@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import MascotaApi from "../../api/apiMascotas";
 import { useEffect, useState } from "react";
+import MascotasEdit from "./MascotasEdit";
 
-function MascotasDetail(s) {
+function MascotasDetail() {
 
     const { id } = useParams();
 
@@ -10,6 +11,7 @@ function MascotasDetail(s) {
     const [fetchError, setFetchError] = useState(false);
     const [mascota, setMascota] = useState(null);
     const [editando, setEditando] = useState(false);
+    const [editar, setEditar] = useState(false);
 
     const fetchMascotaDetail = async () => {
 
@@ -33,8 +35,8 @@ function MascotasDetail(s) {
     }, []);
     async function marcarComoAdoptada(id) {
         try {
-            await MascotaApi.patch(`/mascotas/${id}/`, { estado: 'adoptada' });
-            await fetchMascotaDetail(); // refresca la lista con el nuevo estado
+            const response = await MascotaApi.patch(`/mascotas/${id}/`, { estado: 'adoptada' });
+            await fetchMascotaDetail();
         } catch (err) {
             console.log(err.response.data);
         }
@@ -42,25 +44,37 @@ function MascotasDetail(s) {
 
 
     return (
-        <div>
+        <div className="detalle-mascota">
             {fetchError ? (
                 <p>404 - Mascota no encontrada</p>
             ) : (
                 <>
                     <h2>{mascota?.nombre}</h2>
 
-                    <img src={mascota?.imagen} alt={mascota?.nombre} />
+                    <img className="detalle-imagen" src={mascota?.imagen} alt={mascota?.nombre} />
 
-                    <p>Edad: {mascota?.edad}</p>
-                    <p>Raza: {mascota?.raza}</p>
-                    <p>Descripción: {mascota?.descripcion}</p>
-                    <p>estado: {mascota?.estado}</p>
+                    <p><strong>Edad:</strong> {mascota?.edad}</p>
+                    <p><strong>Raza</strong>: {mascota?.raza}</p>
+                    <p><strong>Descripción:</strong> {mascota?.descripcion}</p>
+                    <p><strong>estado:</strong> {mascota?.estado}</p>
 
-
-                    <button onClick={() => marcarComoAdoptada(id)}>
-                        Marcar como adoptada
-                    </button>
-                   
+                    <div className="detalle-botones">
+                        <button onClick={() => marcarComoAdoptada(id)}>
+                            Marcar como adoptada
+                        </button>
+                        <button onClick={() => setEditar(true)}>
+                            Editar
+                        </button>
+                    </div>
+                    {editar && (
+                        <MascotasEdit
+                            mascota={mascota}
+                            onFinish={() => {
+                                fetchMascotaDetail();
+                                setEditar(false);
+                            }}
+                        />
+                    )}
 
 
 

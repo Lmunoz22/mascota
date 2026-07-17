@@ -3,7 +3,7 @@ import MascotaApi from "../../api/apiMascotas";
 
 
 
-function MascotasForm({ onAdd }) {
+function MascotasEdit({ mascota, onFinish }) {
 
 
 
@@ -12,16 +12,30 @@ function MascotasForm({ onAdd }) {
     const [sexo, setSexo] = useState([]);
     const [tamano, setTamano] = useState([]);
 
-    const [tamanoSeleccionado, setTamanoSeleccionado] = useState("");
-    const [estadoSeleccionado, setEstadoSeleccionado] = useState("");
-    const [tipoSeleccionado, setTipoSeleccionado] = useState("");
-    const [sexoSeleccionado, setSexoSeleccionado] = useState("");
+    const [estadoSeleccionado, setEstadoSeleccionado] = useState(mascota?.estado || "");
+    const [tipoSeleccionado, setTipoSeleccionado] = useState(mascota?.tipo_animal || "");
+    const [sexoSeleccionado, setSexoSeleccionado] = useState(mascota?.sexo || "");
+    const [tamanoSeleccionado, setTamanoSeleccionado] = useState(mascota?.tamano || "");
 
-    const [nombre, setNombre] = useState("");
+    const [nombre, setNombre] = useState(mascota?.nombre || "");
     const [imagen, setImagen] = useState(null);
-    const [edad, setEdad] = useState("");
-    const [raza, setRaza] = useState("");
-    const [descripcion, setDescripcion] = useState("");
+    const [edad, setEdad] = useState(mascota?.edad || "");
+    const [raza, setRaza] = useState(mascota?.raza || "");
+    const [descripcion, setDescripcion] = useState(mascota?.descripcion || "");
+
+    useEffect(() => {
+        if (mascota) {
+            setNombre(mascota.nombre);
+            setEdad(mascota.edad);
+            setRaza(mascota.raza);
+            setDescripcion(mascota.descripcion);
+
+            setEstadoSeleccionado(mascota.estado);
+            setTipoSeleccionado(mascota.tipo_animal);
+            setSexoSeleccionado(mascota.sexo);
+            setTamanoSeleccionado(mascota.tamano);
+        }
+    }, [mascota]);
 
 
     const fetchChoices = async () => {
@@ -63,21 +77,21 @@ function MascotasForm({ onAdd }) {
         formData.append("tipo_animal", tipoSeleccionado);
         formData.append("sexo", sexoSeleccionado);
         formData.append("tamano", tamanoSeleccionado);
+        
+
+        if (imagen) {
         formData.append("imagen", imagen);
+    }
+        try{
 
-        onAdd(formData);
-
-        setNombre("");
-        setEdad("");
-        setRaza("");
-        setDescripcion("");
-        setEstadoSeleccionado("");
-        setTipoSeleccionado("");
-        setSexoSeleccionado("");
-        setTamanoSeleccionado("");
-        setImagen(null);
-
-        e.target.reset();
+            const response = await MascotaApi.put(`mascotas/${mascota.id}/`, formData);
+            
+            console.log (response.data)
+        }catch(error){
+            console.log(error.response.data);
+        };
+        
+        onFinish();
 
     }
 
@@ -137,7 +151,7 @@ function MascotasForm({ onAdd }) {
                 </label>
 
 
-                <button type="submit" > Agregar Mascota</button>
+                <button type="submit" > Actualizar Mascota</button>
             </div>
 
         </form>
@@ -146,4 +160,4 @@ function MascotasForm({ onAdd }) {
 
 }
 
-export default MascotasForm;
+export default MascotasEdit;

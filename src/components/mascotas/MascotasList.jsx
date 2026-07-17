@@ -2,7 +2,7 @@
 
 import { Link } from "react-router-dom";
 import MascotasForm from "./MascotasForm";
-import MascotasDetail from "./Mascotasdetail";
+
 
 function MascotasList({ lista, onAdd, onPut}) {
 
@@ -10,9 +10,8 @@ function MascotasList({ lista, onAdd, onPut}) {
 
     return (
         <>
-            <h2>Lista Mascotas</h2>
-            <MascotasDetail onPut={onPut}/>
             <MascotasForm onAdd={onAdd} />
+            <h2 className="listapet">Lista Mascotas</h2>
             <div className="contenedor-cards">
                 {
                     lista.map((m) => (
