@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import MascotaApi from "../../api/apiMascotas";
 import { useEffect, useState } from "react";
 import MascotasEdit from "./MascotasEdit";
+
 
 function MascotasDetail() {
 
@@ -75,6 +76,12 @@ function MascotasDetail() {
                             }}
                         />
                     )}
+
+                    <Link to={`/mascotas/${id}/comentarios`}>
+                        Ver comentarios
+                    </Link>
+
+
 
 
 
