@@ -31,7 +31,7 @@ function ComentariosForm({ mascotaId, onAdd }) {
             return;
         }
         onAdd(comentario);
-        notyf.error("se agrego correctamente el comentario");
+        notyf.success("se agrego correctamente el comentario");
 
         setAutor("");
         setContenido("");

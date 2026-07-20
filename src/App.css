@@ -1,6 +1,4 @@
-
-
-.contenedor-cards{
+.contenedor-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -11,19 +9,20 @@
 
 
 
-.card-mascota{
+.card-mascota {
     width: 300px;
     height: 550px;
     background: #fff;
     border-radius: 18px;
     padding: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.15);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
     display: flex;
     flex-direction: column;
     transition: .3s;
 }
-.listapet{
-    
+
+.listapet {
+
     text-align: center;
     font-size: 35px;
     margin: 40px 0;
@@ -33,15 +32,15 @@
 
 
 
-.card-mascota:hover{
+.card-mascota:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
 }
 
 
 
 
-.card-mascota img{
+.card-mascota img {
     width: 100%;
     height: 280px;
     object-fit: cover;
@@ -51,7 +50,7 @@
 
 
 
-.contenido-card{
+.contenido-card {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -60,7 +59,7 @@
 
 
 
-.contenido-card h3{
+.contenido-card h3 {
     font-size: 25px;
     margin-bottom: 10px;
 }
@@ -68,7 +67,7 @@
 
 
 
-.contenido-card p{
+.contenido-card p {
     margin-bottom: 10px;
     line-height: 1.4;
 }
@@ -76,7 +75,7 @@
 
 
 
-.contenido-card p:last-of-type{
+.contenido-card p:last-of-type {
     font-weight: bold;
     color: gray;
 }
@@ -84,7 +83,7 @@
 
 
 
-.contenido-card a{
+.contenido-card a {
 
     margin-top: auto;
     text-align: center;
@@ -92,18 +91,18 @@
     padding: 12px;
     border-radius: 10px;
 
-                                                                        
+
 }
 
 
-.acciones{
+.acciones {
     display: flex;
     gap: 10px;
     margin-top: auto;
 }
 
 .acciones a,
-.acciones button{
+.acciones button {
     flex: 1;
     padding: 12px;
     border: none;
@@ -117,114 +116,114 @@
 }
 
 
-.btn-ver{
+.btn-ver {
     background: #28a745;
     color: white;
 }
 
-.btn-ver:hover{
+.btn-ver:hover {
     background: #218838;
 }
 
 
-.btn-eliminar{
+.btn-eliminar {
     background: #dc3545;
     color: white;
 }
 
-.btn-eliminar:hover{
+.btn-eliminar:hover {
     background: #c82333;
 }
 
 
-.formulario-mascota{
+.formulario-mascota {
 
-    max-width:900px;
-    margin:40px auto;
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-}
-
-.formulario-mascota h2{
-
-    text-align:center;
-    margin-bottom:30px;
-    color:#333;
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
 
 }
 
+.formulario-mascota h2 {
 
-.forms{
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
 
 }
 
-.formulario-mascota label{
 
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    font-weight:bold;
+.forms {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+}
+
+.formulario-mascota label {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: bold;
 
 }
 
 
 .formulario-mascota input,
-.formulario-mascota select{
+.formulario-mascota select {
 
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:16px;
-
-}
-
-.formulario-mascota textarea{
-
-    width:100%;
-    margin-top:8px;
-    resize:none;
-    height:120px;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:16px;
-
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
 
 }
 
-.formulario-mascota button{
+.formulario-mascota textarea {
 
-    width:100%;
-    margin-top:5px;
-    padding:15px;
-    background:#ff8a00;
-    color:white;
-    border:none;
-    border-radius:12px;
-    font-size:18px;
-    cursor:pointer;
+    width: 100%;
+    margin-top: 8px;
+    resize: none;
+    height: 120px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+
+
 }
-    
+
+.formulario-mascota button {
+
+    width: 100%;
+    margin-top: 5px;
+    padding: 15px;
+    background: #ff8a00;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    cursor: pointer;
+}
 
 
-.detalle-mascota{
+
+.detalle-mascota {
     width: 700px;
     margin: 40px auto;
     padding: 30px;
     background: white;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
     text-align: center;
 }
 
-.detalle-imagen{
+.detalle-imagen {
     width: 350px;
     height: 300px;
     object-fit: cover;
@@ -232,25 +231,25 @@
     margin: 20px 0;
 }
 
-.detalle-info{
+.detalle-info {
     text-align: left;
     margin-top: 20px;
 }
 
-.detalle-info p{
+.detalle-info p {
     margin: 12px 0;
     font-size: 18px;
 }
 
-.detalle-botones{
+.detalle-botones {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 30px;
-    
+
 }
 
-.detalle-botones button{
+.detalle-botones button {
     padding: 12px 25px;
     border: none;
     border-radius: 8px;
@@ -259,39 +258,39 @@
     background-color: #e57800;
     color: white;
 }
-    
 
-.contenedor-comentarios{
+
+.contenedor-comentarios {
     max-width: 900px;
     margin: 40px auto;
 }
 
-.titulo-comentarios{
+.titulo-comentarios {
     margin-bottom: 20px;
     font-size: 30px;
     text-align: center;
 }
 
-.card-comentario{
+.card-comentario {
     background: white;
     border-radius: 15px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
 }
 
-.card-comentario h3{
+.card-comentario h3 {
     margin-bottom: 10px;
     color: #333;
 }
 
-.card-comentario p{
+.card-comentario p {
     margin-bottom: 20px;
     font-size: 17px;
     line-height: 1.5;
 }
 
-.btn-eliminar-comentario{
+.btn-eliminar-comentario {
     background: #dc3545;
     color: white;
     border: none;
@@ -301,14 +300,23 @@
     transition: .3s;
 }
 
-.btn-eliminar-comentario:hover{
+.btn-eliminar-comentario:hover {
     background: #c82333;
 }
-    
 
+.btn-comentarios {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: #0d6efd;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .3s;
+}
 
-
-
-
-
-    
+.btn-comentarios:hover {
+    background: #0b5ed7;
+}

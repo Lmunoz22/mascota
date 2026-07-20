@@ -7,6 +7,7 @@ import ComentariosForm from "../components/comentarios/ComentariosForm";
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 
+
 const notyf = new Notyf({
     duration: 3000,
     position: { x: 'center', y: 'top' },
@@ -17,7 +18,7 @@ const notyf = new Notyf({
 function ComentariosPage() {
 
     const { id } = useParams();
-
+    const [error, setError] = useState("");
     const [comentariosList, setComentariosList] = useState([]);
 
     const fetchComentarios = async () => {
@@ -29,7 +30,15 @@ function ComentariosPage() {
             setComentariosList(comentariosMascota);
 
         } catch (error) {
-            console.log(error);
+
+            if (error.response?.status === 404) {
+                setError("404 - No se encontraron comentarios.");
+            }
+            else {
+                setError("Ocurrió un error al cargar los comentarios.");
+            }
+
+            console.log(error.response?.data);
         }
     };
     const addComentario = async (comentario) => {
@@ -38,8 +47,18 @@ function ComentariosPage() {
             const response = await MascotaApi.post("comentarios/", comentario);
 
         } catch (error) {
-            console.log(error);
-            notyf.error("No se pudo agregar la Mascota. Inténtalo de nuevo.");
+
+            if (error.response?.status === 400) {
+                setError("Revisa los datos ingresados.");
+            }
+            else if (error.response?.status === 404) {
+                setError("No se encontró la mascota.");
+            }
+            else {
+                setError("No fue posible agregar el comentario.");
+            }
+
+            console.log(error.response?.data)
         } finally {
             fetchComentarios();
         }
@@ -50,7 +69,15 @@ function ComentariosPage() {
             const response = await MascotaApi.delete(`comentarios/${idComentario}/`);
             notyf.success("Se Elimino Correctamente");
         } catch (error) {
-            console.log(error);
+            if (error.response?.status === 404) {
+                setError("El comentario no existe.");
+            }
+            else {
+                setError("No fue posible eliminar el comentario.");
+            }
+
+            console.log(error.response?.data);
+
 
         } finally {
             fetchComentarios();
