@@ -30,7 +30,7 @@ function MascotasPage() {
     const addMascotas = async (mascota) => {
         try {
             const response = await MascotaApi.post('mascotas/', mascota)
-
+            notyf.success( 'se ha agregado correctamente!');
         } catch (error) {
             console.log(error)
 
@@ -40,7 +40,7 @@ function MascotasPage() {
     }
     const deleteMascota = async (id) => {
         try {
-            await MascotaApi.delete(`mascotas/${id}/`);
+            response = await MascotaApi.delete(`mascotas/${id}/`);
             notyf.success("Se Elimino Correctamente");
         } catch (error) {
             console.log(error);

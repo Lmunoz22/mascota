@@ -68,6 +68,23 @@ function MascotasForm({ onAdd }) {
             notyf.error("El nombre de la mascota es obligatorio.");
             return;
         }
+        if (!edad.trim()) {
+            notyf.error("La edad de la mascota es obligatorio.");
+            return;
+        }
+        if (!descripcion.trim()) {
+            notyf.error("La descripcion de la mascota es obligatorio.");
+            return;
+        }
+        if (!raza.trim()) {
+            notyf.error("La raza de la mascota es obligatorio.");
+            return;
+        }
+        if (!imagen) {
+            notyf.error("La imagen de la mascota es obligatoria.");
+            return;
+        }
+
 
 
         const formData = new FormData();
@@ -82,7 +99,7 @@ function MascotasForm({ onAdd }) {
         formData.append("imagen", imagen);
         try {
             onAdd(formData);
-            notyf.success( 'se ha agregado correctamente!');
+
 
             setNombre("");
             setEdad("");

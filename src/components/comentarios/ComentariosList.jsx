@@ -1,22 +1,28 @@
-function ComentariosList({ lista }) {
+function ComentariosList({ lista, onDelete }) {
 
     return (
-        <>
-            <h2>Comentarios</h2>
+        <div className="contenedor-comentarios">
 
-            {
-                lista.map((e) => (
-                    <div key={e.id}>
+            <h2 className="titulo-comentarios">Comentarios</h2>
 
-                        <h4>{e.autor}</h4>
+            {lista.map((comentario) => (
+                <div className="card-comentario" key={comentario.id}>
 
-                        <p>{e.contenido}</p>
+                    <h3>{comentario.autor}</h3>
 
-                    </div>
-                ))
-            }
+                    <p>{comentario.contenido}</p>
 
-        </>
+                    <button
+                        className="btn-eliminar-comentario"
+                        onClick={() => onDelete(comentario.id)}
+                    >
+                        Eliminar
+                    </button>
+
+                </div>
+            ))}
+
+        </div>
     );
 }
 
