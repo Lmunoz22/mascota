@@ -37,7 +37,7 @@ function MascotasPage() {
 
     const addMascotas = async (mascota) => {
         try {
-            const response = await MascotaApi.post('mascotas/', mascota)
+            await MascotaApi.post('mascotas/', mascota)
             notyf.success('se ha agregado correctamente!');
         } catch (error) {
             if (error.response?.status === 400) {
@@ -56,7 +56,7 @@ function MascotasPage() {
     }
     const deleteMascota = async (id) => {
         try {
-            response = await MascotaApi.delete(`mascotas/${id}/`);
+            await MascotaApi.delete(`mascotas/${id}/`);
             notyf.success("Se Elimino Correctamente");
         } catch (error) {
             if (error.response?.status === 404) {
@@ -84,7 +84,7 @@ function MascotasPage() {
     return (
         <>
             <h1>Pagina Mascotas</h1>
-
+            {error && <p className="mensaje-error">{error}</p>}
             <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascota} />
         </>
     )

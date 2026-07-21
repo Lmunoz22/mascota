@@ -11,7 +11,6 @@ function MascotasDetail() {
     console.log(id);
     const [error, setError] = useState("");
     const [mascota, setMascota] = useState(null);
-    const [editando, setEditando] = useState(false);
     const [editar, setEditar] = useState(false);
 
     const fetchMascotaDetail = async () => {
@@ -43,7 +42,7 @@ function MascotasDetail() {
 
     async function marcarComoAdoptada(id) {
         try {
-            const response = await MascotaApi.patch(`/mascotas/${id}/`, { estado: 'adoptada' });
+             await MascotaApi.patch(`/mascotas/${id}/`, { estado: 'adoptada' });
             await fetchMascotaDetail();
         } catch (err) {
             console.log(err.response.data);

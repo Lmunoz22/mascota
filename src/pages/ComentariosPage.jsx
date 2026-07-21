@@ -63,7 +63,7 @@ function ComentariosPage() {
     const addComentario = async (comentario) => {
         try {
 
-            const response = await MascotaApi.post("comentarios/", comentario);
+            await MascotaApi.post("comentarios/", comentario);
 
         } catch (error) {
 
@@ -84,8 +84,7 @@ function ComentariosPage() {
     };
     const deleteComentario = async (idComentario) => {
         try {
-
-            const response = await MascotaApi.delete(`comentarios/${idComentario}/`);
+            await MascotaApi.delete(`comentarios/${idComentario}/`);
             notyf.success("Se Elimino Correctamente");
         } catch (error) {
             if (error.response?.status === 404) {

@@ -11,7 +11,6 @@ const notyf = new Notyf({
 
 function ComentariosForm({ mascotaId, onAdd }) {
 
-    const [error, setError] = useState("");
     const [autor, setAutor] = useState("");
     const [contenido, setContenido] = useState("");
 
