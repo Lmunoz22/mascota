@@ -11,6 +11,7 @@ const notyf = new Notyf({
 
 function ComentariosForm({ mascotaId, onAdd }) {
 
+    const [error, setError] = useState("");
     const [autor, setAutor] = useState("");
     const [contenido, setContenido] = useState("");
 
@@ -38,27 +39,30 @@ function ComentariosForm({ mascotaId, onAdd }) {
     };
 
     return (
-        <form className="formulario-mascota" onSubmit={handleSubmit}>
+    
+                <form className="formulario-mascota" onSubmit={handleSubmit}>
 
-            <label>Autor</label>
-            <input
-                type="text"
-                value={autor}
-                onChange={(e) => setAutor(e.target.value)}
-            />
+                    <label>Autor</label>
+                    <input
+                        type="text"
+                        value={autor}
+                        onChange={(e) => setAutor(e.target.value)}
+                    />
 
-            <label>Comentario</label>
-            <textarea
-                value={contenido}
-                onChange={(e) => setContenido(e.target.value)}
-            />
+                    <label>Comentario</label>
+                    <textarea
+                        value={contenido}
+                        onChange={(e) => setContenido(e.target.value)}
+                    />
 
-            <button type="submit">
-                Agregar comentario
-            </button>
+                    <button type="submit">
+                        Agregar comentario
+                    </button>
 
-        </form>
-    );
+                </form>
+            
+    )
+    
 }
 
 export default ComentariosForm;

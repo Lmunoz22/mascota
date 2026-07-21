@@ -110,6 +110,7 @@ function MascotasEdit({ mascota, onFinish }) {
     }
 
     return (
+        
         <form className="formulario-mascota" onSubmit={e => handleSubmit(e)} encType="multipart/form-data">
 
             <div className="forms">
@@ -169,6 +170,7 @@ function MascotasEdit({ mascota, onFinish }) {
             </div>
 
         </form>
+  
 
     )
 

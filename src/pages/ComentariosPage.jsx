@@ -41,6 +41,25 @@ function ComentariosPage() {
             console.log(error.response?.data);
         }
     };
+
+    const fetchMascota = async () => {
+        try {
+
+            await MascotaApi.get(`mascotas/${id}/`);
+
+            setError("");
+
+        } catch (error) {
+
+            if (error.response?.status === 404) {
+                setError("404 - Mascota no encontrada.");
+            } else {
+                setError("Ocurrió un error al cargar la mascota.");
+            }
+
+            console.log(error.response?.data);
+        }
+    };
     const addComentario = async (comentario) => {
         try {
 
@@ -86,15 +105,29 @@ function ComentariosPage() {
 
     useEffect(() => {
         fetchComentarios();
+        fetchMascota();
     }, []);
 
 
     return (
         <>
+            
 
-            <ComentariosForm mascotaId={id} onAdd={addComentario} />
-            <ComentariosList lista={comentariosList} onDelete={deleteComentario}
-            />
+            {error ? (
+                <p className="mensaje-error">{error}</p>
+            ) : (
+                <>
+                    <ComentariosForm
+                        mascotaId={id}
+                        onAdd={addComentario}
+                    />
+
+                    <ComentariosList
+                        lista={comentariosList}
+                        onDelete={deleteComentario}
+                    />
+                </>
+            )}
         </>
     );
 }
