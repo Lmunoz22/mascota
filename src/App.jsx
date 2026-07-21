@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import MascotasPage from './pages/MascotasPages';
 import MascotasForm from './components/mascotas/MascotasForm';
 import MascotasDetail from './components/mascotas/Mascotasdetail';
+import ComentariosPage from "./pages/ComentariosPage";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="mascotas/" element={<MascotasPage/>}/>
           <Route path="mascotas/:id" element={<MascotasDetail/>}/>
+          <Route path="mascotas/:id/comentarios" element={<ComentariosPage />} />
         </Routes>
 
       </Router>

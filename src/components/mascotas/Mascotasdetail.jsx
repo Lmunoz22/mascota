@@ -1,14 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import MascotaApi from "../../api/apiMascotas";
 import { useEffect, useState } from "react";
 import MascotasEdit from "./MascotasEdit";
+
 
 function MascotasDetail() {
 
     const { id } = useParams();
 
     console.log(id);
-    const [fetchError, setFetchError] = useState(false);
+    const [error, setError] = useState("");
     const [mascota, setMascota] = useState(null);
     const [editando, setEditando] = useState(false);
     const [editar, setEditar] = useState(false);
@@ -22,8 +23,14 @@ function MascotasDetail() {
             setMascota(response.data);
 
         } catch (error) {
-            console.log(error);
-            setFetchError(true);
+            if (error.response?.status === 404) {
+                setError("404 - Mascota no encontrada");
+            }
+            else {
+                setError("Ocurrió un error al cargar la mascota.");
+            }
+
+            console.log(error.response?.data);
         }
 
 
@@ -33,6 +40,7 @@ function MascotasDetail() {
     useEffect(() => {
         fetchMascotaDetail()
     }, []);
+
     async function marcarComoAdoptada(id) {
         try {
             const response = await MascotaApi.patch(`/mascotas/${id}/`, { estado: 'adoptada' });
@@ -45,8 +53,8 @@ function MascotasDetail() {
 
     return (
         <div className="detalle-mascota">
-            {fetchError ? (
-                <p>404 - Mascota no encontrada</p>
+            {error ? (
+                <p>{error}</p>
             ) : (
                 <>
                     <h2>{mascota?.nombre}</h2>
@@ -62,10 +70,12 @@ function MascotasDetail() {
                         <button onClick={() => marcarComoAdoptada(id)}>
                             Marcar como adoptada
                         </button>
+
                         <button onClick={() => setEditar(true)}>
                             Editar
                         </button>
                     </div>
+
                     {editar && (
                         <MascotasEdit
                             mascota={mascota}
@@ -76,14 +86,16 @@ function MascotasDetail() {
                         />
                     )}
 
-
-
+                    <Link
+                        to={`/mascotas/${id}/comentarios`} className="btn-comentarios"
+                    >
+                        Ver comentarios
+                    </Link>
 
                 </>
             )}
         </div>
     );
 }
-
 
 export default MascotasDetail;

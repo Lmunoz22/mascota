@@ -13,7 +13,7 @@ const notyf = new Notyf({
 
 
 function MascotasPage() {
-
+    const [error, setError] = useState("");
     const [mascotasList, setMascotasList] = useState([]);
     const fetchMascotas = async () => {
         try {
@@ -22,6 +22,14 @@ function MascotasPage() {
             setMascotasList(response.data);
         } catch (error) {
             console.log(error);
+            if (error.response?.status === 404) {
+                setError("404 - No se encontraron comentarios.");
+            }
+            else {
+                setError("Ocurrió un error al cargar los comentarios.");
+            }
+
+            console.log(error.response?.data);
         };
 
 
@@ -30,9 +38,17 @@ function MascotasPage() {
     const addMascotas = async (mascota) => {
         try {
             const response = await MascotaApi.post('mascotas/', mascota)
-
+            notyf.success('se ha agregado correctamente!');
         } catch (error) {
-            console.log(error)
+            if (error.response?.status === 400) {
+                setError("Revisa los datos ingresados.");
+            }
+            else if (error.response?.status === 404) {
+                setError("No se encontró la mascota.");
+            }
+            else {
+                setError("No fue posible agregar el comentario.");
+            }
 
         } finally { fetchMascotas(); }
 
@@ -40,11 +56,18 @@ function MascotasPage() {
     }
     const deleteMascota = async (id) => {
         try {
-            await MascotaApi.delete(`mascotas/${id}/`);
+            response = await MascotaApi.delete(`mascotas/${id}/`);
             notyf.success("Se Elimino Correctamente");
         } catch (error) {
-            console.log(error);
-            
+            if (error.response?.status === 404) {
+                setError("El comentario no existe.");
+            }
+            else {
+                setError("No fue posible eliminar el comentario.");
+            }
+
+            console.log(error.response?.data);
+
         } finally {
             fetchMascotas();
         }
@@ -62,7 +85,7 @@ function MascotasPage() {
         <>
             <h1>Pagina Mascotas</h1>
 
-            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascota}/>
+            <MascotasList lista={mascotasList} onAdd={addMascotas} onDelete={deleteMascota} />
         </>
     )
 
